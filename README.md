@@ -1,0 +1,1 @@
+# supermarket-offer-scanner

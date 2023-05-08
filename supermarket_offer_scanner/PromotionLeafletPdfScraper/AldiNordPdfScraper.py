@@ -1,3 +1,5 @@
+import time
+
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
@@ -14,8 +16,9 @@ class AldiNordPdfScraper(PdfScraper):
     def get_urls(self) -> [str]:
         self.driver.get(self.main_url)
 
-        cookie_banner = WebDriverWait(self.driver, 10).until(
-            EC.element_to_be_clickable((By.ID, "onetrust-accept-btn-handler"))
+        time.sleep(10)
+        cookie_banner = self.driver.execute_script(
+            """return document.querySelector('div#usercentrics-root').shadowRoot.querySelector('button[data-testid="uc-deny-all-button"]')"""
         )
         cookie_banner.click()
 

@@ -1,8 +1,6 @@
-from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.firefox.options import Options as FirefoxOptions
+from selenium.webdriver.support.wait import WebDriverWait
 
 from supermarket_offer_scanner.PromotionLeafletPdfScraper.PdfScraper import PdfScraper
 
@@ -23,7 +21,7 @@ class LidlPdfScraper(PdfScraper):
 
         pdf_downloads = self.driver.find_elements(
             By.XPATH,
-            '//*[@id="flyer-overview__content"]//a[@aria-label="Download"]',
+            '(//*[@id="flyer-overview__content"]//a[@aria-label="Download"])[2]',
         )
 
         return [item.get_attribute("href") for item in pdf_downloads]

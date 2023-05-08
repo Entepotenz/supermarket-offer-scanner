@@ -7,12 +7,12 @@ import typer
 from typing_extensions import Annotated
 
 from PdfPatternMatching import PdfPatterMatching
-from ActionProspectusPdfScraper import ActionProspectusPdfScraper
+from PromotionLeafletPdfScraper.PdfScraper import PdfScraper
 
 app = typer.Typer(add_completion=False)
 
 
-shop_names = ["lidl", "aldi"]
+shop_names = ["lidl", "aldinord"]
 
 
 def get_name():
@@ -49,7 +49,7 @@ def main(
 
     regex_pattern_collection = ["({})".format(item) for item in matchers]
 
-    scraper = ActionProspectusPdfScraper(headless=headless)
+    scraper = PdfScraper.get_pdf_scraper(shop_name=shop_name, headless=headless)
 
     for url in scraper.get_urls():
         # Download PDF and read response

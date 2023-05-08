@@ -4,17 +4,14 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
 
+from supermarket_offer_scanner.PromotionLeafletPdfScraper.PdfScraper import PdfScraper
 
-class ActionProspectusPdfScraper:
-    def __init__(self, headless: bool = False):
-        self.main_url = "https://www.lidl.de/c/online-prospekte/s10005610"
-        self.options = FirefoxOptions()
-        if headless is True:
-            self.options.add_argument("--headless")
-        self.driver = webdriver.Firefox(options=self.options)
 
-    def __del__(self):
-        self.driver.close()
+class LidlPdfScraper(PdfScraper):
+    main_url = "https://www.lidl.de/c/online-prospekte/s10005610"
+
+    def __init__(self, headless: bool):
+        PdfScraper.__init__(self, headless=headless)
 
     def get_urls(self) -> [str]:
         self.driver.get(self.main_url)

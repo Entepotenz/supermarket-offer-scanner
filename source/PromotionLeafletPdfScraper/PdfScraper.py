@@ -35,3 +35,9 @@ class PdfScraper:
                 )
 
                 return LidlPdfScraper(headless=headless)
+            case "hit":
+                from .HitPdfScraper import (
+                    HitPdfScraper,
+                )
+
+                return HitPdfScraper(headless=headless)

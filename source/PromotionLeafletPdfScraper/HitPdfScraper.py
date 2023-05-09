@@ -5,8 +5,8 @@ from selenium.webdriver.support.wait import WebDriverWait
 from .PdfScraper import PdfScraper
 
 
-class LidlPdfScraper(PdfScraper):
-    main_url = "https://www.lidl.de/c/online-prospekte/s10005610"
+class HitPdfScraper(PdfScraper):
+    main_url = "https://www.hit.de/handzettel-muenster/aktuell.html"
 
     def __init__(self, headless: bool):
         PdfScraper.__init__(self, headless=headless)
@@ -14,11 +14,16 @@ class LidlPdfScraper(PdfScraper):
     def get_urls(self) -> [str]:
         self.driver.get(self.main_url)
 
-        cookie_banner = WebDriverWait(self.driver, 10).until(expected_conditions.element_to_be_clickable((By.ID, "onetrust-accept-btn-handler")))cookie_banner.click()
+        cookie_banner = WebDriverWait(self.driver, 10).until(
+            expected_conditions.element_to_be_clickable(
+                (By.XPATH, '//button[contains(text(), "Auswahl bestätigen")]')
+            )
+        )
+        cookie_banner.click()
 
         pdf_downloads = self.driver.find_elements(
             By.XPATH,
-            '(//*[@id="flyer-overview__content"]//a[@aria-label="Download"])[2]',
+            '//span[contains(text(), "PDF herunterladen")]/parent::a',
         )
 
         return [item.get_attribute("href") for item in pdf_downloads]

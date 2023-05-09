@@ -1,0 +1,7 @@
+*/1 * * * * cat /var/spool/cron/crontabs/root
+*/1 * * * * \
+    s6-setuidgid abc sh -c '\
+        set -x; \
+        python /app/source/main.py "lidl" --matchers "montag" --matchers "dienstag"; \
+        python /app/source/main.py "aldinord" --matchers "montag" --matchers "dienstag"; \
+    '

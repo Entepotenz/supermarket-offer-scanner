@@ -4,9 +4,9 @@ import urllib.parse
 
 
 class Pushover:
-    def __int__(self, token: str, user_key: str):
-        self.token = token
-        self.user_key = user_key
+    def __init__(self, token: str, user_key: str):
+    self.token = token
+    self.user_key = user_key
 
     def send_notification(self, message: str) -> None:
         conn = http.client.HTTPSConnection("api.pushover.net:443")

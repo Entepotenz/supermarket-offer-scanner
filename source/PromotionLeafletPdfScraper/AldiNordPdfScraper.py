@@ -2,7 +2,7 @@ import time
 
 from selenium.webdriver.common.by import By
 
-from supermarket_offer_scanner.PromotionLeafletPdfScraper.PdfScraper import PdfScraper
+from .PdfScraper import PdfScraper
 
 
 class AldiNordPdfScraper(PdfScraper):

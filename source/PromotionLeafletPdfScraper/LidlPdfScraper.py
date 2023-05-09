@@ -2,7 +2,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
-from supermarket_offer_scanner.PromotionLeafletPdfScraper.PdfScraper import PdfScraper
+from .PdfScraper import PdfScraper
 
 
 class LidlPdfScraper(PdfScraper):

@@ -1,15 +1,17 @@
 from abc import abstractmethod
 
 from selenium import webdriver
-from selenium.webdriver.firefox.options import Options as FirefoxOptions
 
 
 class PdfScraper:
     def __init__(self, headless: bool):
-        self.options = FirefoxOptions()
+        self.options = webdriver.ChromeOptions()
         if headless is True:
             self.options.add_argument("--headless")
-        self.driver = webdriver.Firefox(options=self.options)
+        self.options.add_argument("--no-sandbox")
+        self.options.add_argument("--disable-gpu")
+        self.options.add_argument("--disable-dev-shm-usage")  # Not used
+        self.driver = webdriver.Chrome(options=self.options)
 
     def __del__(self):
         self.driver.close()
@@ -22,13 +24,13 @@ class PdfScraper:
     def get_pdf_scraper(shop_name: str, headless: bool = False):
         match shop_name.lower():
             case "aldinord":
-                from supermarket_offer_scanner.PromotionLeafletPdfScraper.AldiNordPdfScraper import (
+                from .AldiNordPdfScraper import (
                     AldiNordPdfScraper,
                 )
 
                 return AldiNordPdfScraper(headless=headless)
             case "lidl":
-                from supermarket_offer_scanner.PromotionLeafletPdfScraper.LidlPdfScraper import (
+                from .LidlPdfScraper import (
                     LidlPdfScraper,
                 )
 

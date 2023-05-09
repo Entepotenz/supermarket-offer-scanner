@@ -19,7 +19,7 @@ class PdfPatterMatching:
         for val in texts_grouped_by_page:
             matches_for_current_page = []
             for pattern in regex_patterns:
-                matches = re.findall(pattern, val)
+                matches = re.findall(pattern, val, flags=re.IGNORECASE)
                 if matches:
                     matches_for_current_page.append(matches)
 

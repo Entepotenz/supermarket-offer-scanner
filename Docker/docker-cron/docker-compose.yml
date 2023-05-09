@@ -1,0 +1,24 @@
+---
+version: "3.7"
+
+# from: https://github.com/htpcBeginner/docker-traefik/blob/master/docker-compose-t2.yml
+x-common-keys-core: &common-keys-core
+  security_opt:
+    - no-new-privileges:true
+
+services:
+  # based on this: https://github.com/AnalogJ/docker-cron
+  supermarket-offser-scanner:
+    <<: *common-keys-core # See EXTENSION FIELDS at the top
+    build:
+      context: ../../
+      dockerfile: ./Docker/docker-cron/Dockerfile
+    restart: unless-stopped
+    environment:
+      TZ: "Europe/Berlin"
+      PUID: "$PUID"
+      PGID: "$PGID"
+    #      PUSHOVER_USER_KEY: "$PUSHOVER_USER_KEY"
+    #      PUSHOVER_TOKEN: "$PUSHOVER_TOKEN"
+    volumes:
+      - ./crontab-sample.txt:/config/crontab.txt

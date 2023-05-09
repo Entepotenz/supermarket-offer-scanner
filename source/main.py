@@ -1,6 +1,7 @@
 import io
-import urllib.request
+import os
 import pprint
+import urllib.request
 from typing import Optional, List
 
 import typer
@@ -8,11 +9,14 @@ from typing_extensions import Annotated
 
 from PdfPatternMatching import PdfPatterMatching
 from PromotionLeafletPdfScraper.PdfScraper import PdfScraper
+from Pushover import Pushover
 
 app = typer.Typer(add_completion=False)
 
-
 shop_names = ["lidl", "aldinord"]
+
+ENVIRONMENT_VARIABLE_PUSHOVER_USER_KEY = "PUSHOVER_USER_KEY"
+ENVIRONMENT_VARIABLE_PUSHOVER_TOKEN = "PUSHOVER_TOKEN"
 
 
 def get_name():
@@ -38,16 +42,26 @@ def main(
         print("No provided matcher - at least one matcher is required")
         raise typer.Abort()
     typer.echo(f"Matchers: {matchers}")
+    regex_pattern_collection = matchers
+
+    pushover_service = None
+
+    pushover_user_key = os.getenv(
+        ENVIRONMENT_VARIABLE_PUSHOVER_USER_KEY, pushover_user_key
+    )
+    pushover_token = os.getenv(ENVIRONMENT_VARIABLE_PUSHOVER_TOKEN, pushover_token)
 
     if (pushover_token and not pushover_user_key) or (
         not pushover_token and pushover_user_key
     ):
-        print("if using pushover you need to provide the token AND user_key")
+        print(
+            f"if using pushover you need to provide the ${ENVIRONMENT_VARIABLE_PUSHOVER_USER_KEY} AND ${ENVIRONMENT_VARIABLE_PUSHOVER_TOKEN}"
+        )
         raise typer.Abort()
-    typer.echo(f"pushover_token: {pushover_token}")
-    typer.echo(f"pushover_user_key: {pushover_user_key}")
 
-    regex_pattern_collection = ["({})".format(item) for item in matchers]
+    if pushover_token and pushover_user_key:
+        print("using pushover notification service")
+        pushover_service = Pushover(token=pushover_token, user_key=pushover_user_key)
 
     scraper = PdfScraper.get_pdf_scraper(shop_name=shop_name, headless=headless)
 
@@ -60,7 +74,14 @@ def main(
             pdf_file, regex_pattern_collection
         )
 
-        pprint.pprint(result)
+        if [item for item in result if (item and item != [])]:
+            pprint.pprint(result)
+
+            if pushover_service:
+                pretty_result = pprint.pformat(result, indent=4)
+                pushover_service.send_notification(pretty_result)
+        else:
+            print("no matches")
 
 
 if __name__ == "__main__":

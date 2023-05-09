@@ -14,7 +14,12 @@ class LidlPdfScraper(PdfScraper):
     def get_urls(self) -> [str]:
         self.driver.get(self.main_url)
 
-        cookie_banner = WebDriverWait(self.driver, 10).until(expected_conditions.element_to_be_clickable((By.ID, "onetrust-accept-btn-handler")))cookie_banner.click()
+        cookie_banner = WebDriverWait(self.driver, 10).until(
+            expected_conditions.element_to_be_clickable(
+                (By.ID, "onetrust-accept-btn-handler")
+            )
+        )
+        cookie_banner.click()
 
         pdf_downloads = self.driver.find_elements(
             By.XPATH,

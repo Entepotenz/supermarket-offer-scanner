@@ -41,3 +41,9 @@ class PdfScraper:
                 )
 
                 return HitPdfScraper(headless=headless)
+            case "netto":
+                from .NettoPdfScraper import (
+                    NettoPdfScraper,
+                )
+
+                return NettoPdfScraper(headless=headless)

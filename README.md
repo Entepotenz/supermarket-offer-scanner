@@ -10,7 +10,7 @@ You can run this as a command line project or by cron inside a docker container.
 ```yml
 services:
   supermarket-offer-scanner:
-    image: TODO:latest
+    image: ghcr.io/entepotenz/supermarket-offer-scanner:latest
     restart: unless-stopped
     environment:
       TZ: "Europe/London"

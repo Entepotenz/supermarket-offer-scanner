@@ -8,8 +8,7 @@ if [[ "${TRACE-0}" == "1" ]]; then set -o xtrace; fi
 
 # make our folders
 mkdir -p \
-    /config \
-    /data
+    /config
 
 # copy default config if not present in /config
 if [[ ! -e /config/crontab.txt ]]; then
@@ -22,9 +21,7 @@ cp /config/crontab.txt /var/spool/cron/crontabs/root
 
 # permissions
 chown -R abc:abc \
-    /config \
-    /data
+    /config
 
 chmod u+rwx -R \
-    /config \
-    /data
+    /config

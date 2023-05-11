@@ -111,6 +111,10 @@ jobs:
             prefix=
             suffix=
 
+      - name: Read "s6_overlay_version.txt" to variable
+        id: s6OverlayVersion
+        run: echo "version=$(tr -d '\n' < 's6_overlay_version.txt')" >> $GITHUB_OUTPUT
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
@@ -123,3 +127,5 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           secrets: |
             GIT_AUTH_TOKEN=${{ secrets.TOKEN }}
+          build-args: ${{ steps.s6OverlayVersion.outputs.version }}
+          sbom: true

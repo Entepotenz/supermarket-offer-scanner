@@ -127,5 +127,6 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           secrets: |
             GIT_AUTH_TOKEN=${{ secrets.TOKEN }}
-          build-args: ${{ steps.s6OverlayVersion.outputs.version }}
+          build-args: |
+            S6_OVERLAY_VERSION=${{ steps.s6OverlayVersion.outputs.version }}
           sbom: true

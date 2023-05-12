@@ -1,4 +1,5 @@
 import io
+import json
 import os
 import pprint
 import urllib.request
@@ -7,9 +8,9 @@ from typing import Optional, List
 import typer
 from typing_extensions import Annotated
 
-from PdfPatternMatching import PdfPatterMatching
-from PromotionLeafletPdfScraper.PdfScraper import PdfScraper
-from Pushover import Pushover
+import PdfPatternMatching
+import PromotionLeafletPdfScraper.PdfScraper
+import Pushover
 
 app = typer.Typer(add_completion=False)
 
@@ -61,27 +62,36 @@ def main(
 
     if pushover_token and pushover_user_key:
         print("using pushover notification service")
-        pushover_service = Pushover(token=pushover_token, user_key=pushover_user_key)
+        pushover_service = Pushover.Pushover(
+            token=pushover_token, user_key=pushover_user_key
+        )
 
-    scraper = PdfScraper.get_pdf_scraper(shop_name=shop_name, headless=headless)
+    scraper = PromotionLeafletPdfScraper.PdfScraper.PdfScraper.get_pdf_scraper(
+        shop_name=shop_name, headless=headless
+    )
 
+    results = []
     for url in scraper.get_urls():
         # Download PDF and read response
         response = urllib.request.urlopen(url)
         pdf_file = io.BytesIO(response.read())
 
-        result = PdfPatterMatching.run_and_get_results(
+        result = PdfPatternMatching.PdfPatterMatching.run_and_get_results(
             pdf_file, regex_pattern_collection
         )
 
         if [item for item in result if (item and item != [])]:
             pprint.pprint(result)
 
+            results.append(result)
+
             if pushover_service:
                 pretty_result = pprint.pformat(result, indent=4)
                 pushover_service.send_notification(pretty_result)
         else:
             print("no matches")
+
+    return json.dumps(results)
 
 
 if __name__ == "__main__":

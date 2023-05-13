@@ -5,6 +5,8 @@
 Simple project to scan the **upcoming** special offers of supermarkets.
 You can run this as a command line project or by cron inside a docker container.
 
+Feel free to contribute more shops if required :-)
+
 # How to use it with docker-compose?
 
 ```yml

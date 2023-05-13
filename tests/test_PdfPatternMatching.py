@@ -1,3 +1,4 @@
+import logging
 import os
 import sys
 import unittest
@@ -10,6 +11,8 @@ sys.path.insert(
 )
 
 from source import PdfPatternMatching
+
+logger = logging.getLogger(__name__)
 
 
 class TestPdfPatternMatching(unittest.TestCase):
@@ -44,4 +47,7 @@ class TestPdfPatternMatching(unittest.TestCase):
 
 
 if __name__ == "__main__":
+    logging.basicConfig(
+        level=logging.DEBUG, format="%(name)s %(levelname)s %(message)s"
+    )
     unittest.main()

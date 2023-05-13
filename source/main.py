@@ -1,5 +1,6 @@
 import io
 import json
+import logging
 import os
 import pprint
 import urllib.request
@@ -34,13 +35,15 @@ def main(
     ] = True,
     pushover_token: Annotated[Optional[str], typer.Option()] = None,
     pushover_user_key: Annotated[Optional[str], typer.Option()] = None,
+    loglevel: Annotated[Optional[str], typer.Option()] = "warning",
 ):
+    logging.basicConfig(level=loglevel.upper())
     if not shop_name or not shop_name.lower() in shop_names:
-        print("No valid provided SHOP_NAME")
+        logging.error("No valid provided SHOP_NAME")
         raise typer.Abort()
     typer.echo(f"ShopName: {shop_name}")
     if not matchers:
-        print("No provided matcher - at least one matcher is required")
+        logging.error("No provided matcher - at least one matcher is required")
         raise typer.Abort()
     typer.echo(f"Matchers: {matchers}")
     regex_pattern_collection = matchers
@@ -55,13 +58,13 @@ def main(
     if (pushover_token and not pushover_user_key) or (
         not pushover_token and pushover_user_key
     ):
-        print(
+        logging.error(
             f"if using pushover you need to provide the ${ENVIRONMENT_VARIABLE_PUSHOVER_USER_KEY} AND ${ENVIRONMENT_VARIABLE_PUSHOVER_TOKEN}"
         )
         raise typer.Abort()
 
     if pushover_token and pushover_user_key:
-        print("using pushover notification service")
+        logging.info("using pushover notification service")
         pushover_service = Pushover.Pushover(
             token=pushover_token, user_key=pushover_user_key
         )
@@ -89,7 +92,7 @@ def main(
                 pretty_result = pprint.pformat(result, indent=4)
                 pushover_service.send_notification(pretty_result)
         else:
-            print("no matches")
+            logging.warning("no matches")
 
     return json.dumps(results)
 

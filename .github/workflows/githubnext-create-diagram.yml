@@ -15,4 +15,4 @@ jobs:
       - name: Update diagram
         uses: githubocto/repo-visualizer@0.9.1
         with:
-          excluded_paths: "LICENSE,.github"
+          excluded_paths: "LICENSE,.github,Docker"

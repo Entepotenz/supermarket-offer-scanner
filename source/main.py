@@ -89,7 +89,7 @@ def main(
             results.append(result)
 
             if pushover_service:
-                pretty_result = pprint.pformat(result, indent=4)
+                pretty_result = f"ShopName: {shop_name}\nmatchers: {matchers}\n{pprint.pformat(result, indent=4)}"
                 pushover_service.send_notification(pretty_result)
         else:
             logging.warning("no matches")

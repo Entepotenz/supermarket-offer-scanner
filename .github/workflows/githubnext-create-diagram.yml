@@ -1,8 +1,10 @@
+---
+
 name: Create GitHubNext diagram
 on:
   workflow_dispatch: { }
-  push:
-    branches: [ master, main ]
+#  push:
+#    branches: [ master, main ]
 
 jobs:
   get_data:
@@ -14,10 +16,3 @@ jobs:
         uses: githubocto/repo-visualizer@0.9.1
         with:
           excluded_paths: "LICENSE,.github"
-          should_push: false
-          artifact_name: "diagram"
-      - name: Get artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: "diagram"
-          path: "downloads"

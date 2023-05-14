@@ -33,3 +33,7 @@ Please take a look at those two folders:
 - `Docker/docker-one-shot/`
     - run the script (**warning** it is build in a way which makes sure the image is rebuild each time)
         - `Docker/docker-one-shot/build-and-run-and-remove-docker.sh`
+
+# GitHub Next Code Visualization
+
+![Visualization of the codebase](./diagram.svg)

@@ -26,16 +26,16 @@ class TestMain(unittest.TestCase):
                 "--matchers",
                 "montag",
                 "--matchers",
-                "dienstag",
+                "lidl",
                 "--loglevel",
                 "debug",
             ],
         )
         assert_that(result.exit_code, equal_to(0))
         assert_that(result.stdout, contains_string("ShopName: lidl"))
-        assert_that(result.stdout, contains_string("Matchers: ['montag', 'dienstag']"))
+        assert_that(result.stdout, contains_string("Matchers: ['montag', 'lidl']"))
         assert_that(result.stdout, contains_string("Montag"))
-        assert_that(result.stdout, contains_string("Dienstag"))
+        assert_that(result.stdout, contains_string("Lidl"))
 
     def test_app_aldinord(self):
         result = runner.invoke(
@@ -45,27 +45,27 @@ class TestMain(unittest.TestCase):
                 "--matchers",
                 "mon",
                 "--matchers",
-                "die",
+                "aldi",
                 "--loglevel",
                 "debug",
             ],
         )
         assert_that(result.exit_code, equal_to(0))
         assert_that(result.stdout, contains_string("ShopName: aldinord"))
-        assert_that(result.stdout, contains_string("Matchers: ['mon', 'die']"))
+        assert_that(result.stdout, contains_string("Matchers: ['mon', 'aldi']"))
         assert_that(result.stdout, contains_string("Mon"))
-        assert_that(result.stdout, contains_string("Die"))
+        assert_that(result.stdout, contains_string("aldi"))
 
     def test_app_hit(self):
         result = runner.invoke(
             main.app,
-            ["hit", "--matchers", "mon", "--matchers", "die", "--loglevel", "debug"],
+            ["hit", "--matchers", "mon", "--matchers", "hit", "--loglevel", "debug"],
         )
         assert_that(result.exit_code, equal_to(0))
         assert_that(result.stdout, contains_string("ShopName: hit"))
-        assert_that(result.stdout, contains_string("Matchers: ['mon', 'die']"))
+        assert_that(result.stdout, contains_string("Matchers: ['mon', 'hit']"))
         assert_that(result.stdout, contains_string("Mon"))
-        assert_that(result.stdout, contains_string("Die"))
+        assert_that(result.stdout, contains_string("hit"))
 
 
 if __name__ == "__main__":

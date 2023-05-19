@@ -36,4 +36,9 @@ Please take a look at those two folders:
 
 # GitHub Next Code Visualization
 
-![Visualization of the codebase](./diagram.svg)
+[![Alt text for broken image link](./diagram.svg)](https://mango-dune-07a8b7110.1.azurestaticapps.net/?repo=entepotenz%2Fsupermarket-offer-scanner)
+
+# TODOs
+
+- add shop name to pushover message
+- catch exceptions and send them by pushover

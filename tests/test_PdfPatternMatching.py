@@ -45,6 +45,40 @@ class TestPdfPatternMatching(unittest.TestCase):
             contains_inanyorder(*[test_string_but_lowercase.lower()]),
         )
 
+    def test_run_and_get_results_string_normalization(self):
+        with open(self.sample_pdf_filepath, "rb") as fh:
+            buf = BytesIO(fh.read())
+
+        regex_for_string_with_spaces = "THIS\s+IS\s+A\s+TEST\s+STRING\s+WITH\s+SPACES"
+
+        regex_for_string_with_hyphens = "THIS-IS-A-TEST-STRING-WITH-HYPHENS".replace(
+            "-", ""
+        )
+
+        regex_for_string_with_line_breaks = "THIS_IS_A_TEST WITH_LINE_BREAKS"
+
+        regex_collection = [
+            regex_for_string_with_spaces,
+            regex_for_string_with_hyphens,
+            regex_for_string_with_line_breaks,
+        ]
+
+        result = PdfPatternMatching.PdfPatterMatching.run_and_get_results(
+            buf, regex_collection
+        )
+        assert_that(result, has_length(1))
+        assert_that(result.get(0), has_length(3))
+        assert_that(
+            result.get(0),
+            contains_inanyorder(
+                *[
+                    regex_for_string_with_spaces.replace("\s+", " "),
+                    regex_for_string_with_hyphens,
+                    regex_for_string_with_line_breaks,
+                ]
+            ),
+        )
+
 
 if __name__ == "__main__":
     logging.basicConfig(

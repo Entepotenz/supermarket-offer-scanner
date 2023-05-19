@@ -23,6 +23,13 @@ quam Eros.
 
 THIS_IS_A_TEST_STRING
 
+THIS IS A TEST STRING WITH SPACES
+
+THIS-IS-A-TEST-STRING-WITH-HYPHENS
+
+THIS_IS_A_TEST
+WITH_LINE_BREAKS
+
 \pagebreak
 
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore

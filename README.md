@@ -40,5 +40,4 @@ Please take a look at those two folders:
 
 # TODOs
 
-- add shop name to pushover message
 - catch exceptions and send them by pushover

@@ -24,6 +24,19 @@ services:
       - ./Docker/docker-cron/crontab-sample.txt:/config/crontab.txt
 ```
 
+## How to display more context information for a match by using regex?
+
+**keep this in mind:** the regex search is configured to be **always** case-insensitive
+
+Modify the regex in this way:
+`"[^\s]*\s*DEAL_STRING\s*[^\s]*"`
+
+looking for zigbee devices would look like this:
+
+```shell
+python /app/source/main.py "lidl" --matchers "[^\s]*\s*zigbee\s*[^\s]*"
+```
+
 # How to build the docker container yourself?
 
 Please take a look at those two folders:

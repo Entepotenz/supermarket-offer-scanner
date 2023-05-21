@@ -10,6 +10,7 @@ class PdfPatterMatching:
     @staticmethod
     def run_and_get_results(data_pdf: typing.BinaryIO, regex_patterns: [re]) -> dict:
         texts_grouped_by_page = PdfPatterMatching.get_text_grouped_by_page(data_pdf)
+
         texts_grouped_by_page = map(
             PdfPatterMatching.normalize_text, texts_grouped_by_page
         )
@@ -52,15 +53,31 @@ class PdfPatterMatching:
 
     @staticmethod
     def normalize_text(text: str) -> str:
-        text = PdfPatterMatching.remove_non_printable_characters(text)
         text = PdfPatterMatching.normalize_quotation_marks(text)
         text = PdfPatterMatching.remove_hyphens(text)
+        text = PdfPatterMatching.remove_punctuations(text)
+        text = PdfPatterMatching.remove_line_breaks(text)
+        text = PdfPatterMatching.remove_multiple_whitespace_characters(text)
         return text
 
     @staticmethod
-    def remove_non_printable_characters(input_string: str) -> str:
-        printable_chars = set(string.printable)
-        return "".join(filter(lambda x: x in printable_chars, input_string))
+    def remove_line_breaks(input_string: str) -> str:
+        input_string = input_string.replace("\r\n", "")
+        input_string = input_string.replace("\n\r", "")
+        input_string = input_string.replace("\r", "")
+        input_string = input_string.replace("\n", "")
+
+        return input_string
+
+    @staticmethod
+    def remove_punctuations(input_string: str) -> str:
+        for punctuation in string.punctuation:
+            input_string = input_string.replace(punctuation, " ")
+        return input_string
+
+    @staticmethod
+    def remove_multiple_whitespace_characters(input_string: str) -> str:
+        return re.sub("\s+", " ", input_string)
 
     @staticmethod
     def remove_hyphens(input_string: str) -> str:
@@ -68,5 +85,5 @@ class PdfPatterMatching:
 
     @staticmethod
     def normalize_quotation_marks(input_string: str) -> str:
-        normalized_string = unicodedata.normalize("NFKD", input_string)
+        normalized_string = unicodedata.normalize("NFKC", input_string)
         return normalized_string

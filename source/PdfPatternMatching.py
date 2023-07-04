@@ -3,7 +3,7 @@ import string
 import typing
 import unicodedata
 
-import PyPDF2
+import pypdf
 
 
 class PdfPatterMatching:
@@ -44,7 +44,7 @@ class PdfPatterMatching:
 
     @staticmethod
     def get_text_grouped_by_page(data_pdf: typing.BinaryIO) -> [str]:
-        pdf_reader = PyPDF2.PdfReader(data_pdf)
+        pdf_reader = pypdf.PdfReader(data_pdf)
         texts_grouped_by_page = []
         for page in range(len(pdf_reader.pages)):
             texts_grouped_by_page.append(pdf_reader.pages[page].extract_text())

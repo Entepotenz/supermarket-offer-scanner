@@ -79,10 +79,14 @@ jobs:
     permissions:
       contents: read
       packages: write
+    #      id-token: write # needed for signing the images with GitHub OIDC Token
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+
+      #      - name: Install Cosign
+      #        uses: sigstore/cosign-installer@11086d25041f77fe8fe7b9ea4e48e3b9192b8f19 # v3.1.2
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
@@ -117,6 +121,7 @@ jobs:
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
+        id: build-and-push
         with:
           context: .
           platforms: ${{ env.BUILD_PLATFORMS }}
@@ -130,3 +135,19 @@ jobs:
           build-args: |
             S6_OVERLAY_VERSION=${{ steps.s6OverlayVersion.outputs.version }}
           sbom: true
+
+      # https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions#using-an-intermediate-environment-variable
+#      - name: Sign image with a key
+#        run: |
+#          cosign sign --yes --key env://COSIGN_PRIVATE_KEY "${TAGS}@${DIGEST}"
+#        env:
+#          TAGS: ${{ steps.meta.outputs.tags }}
+#          COSIGN_PRIVATE_KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
+#          COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
+#          DIGEST: ${{ steps.build-and-push.outputs.digest }}
+#
+#      - name: Sign the images with GitHub OIDC Token
+#        env:
+#          DIGEST: ${{ steps.build-and-push.outputs.digest }}
+#          TAGS: ${{ steps.meta.outputs.tags }}
+#        run: cosign sign --yes "${TAGS}@${DIGEST}"

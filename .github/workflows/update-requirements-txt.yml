@@ -14,7 +14,7 @@ jobs:
       matrix:
         python-version: [ "3" ]
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Get changed files
         id: changed-files-specific
         uses: tj-actions/changed-files@0fc9663aa70243d87319dbd32fd926344d18d38f # v38.2.0

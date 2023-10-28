@@ -135,6 +135,8 @@ jobs:
           build-args: |
             S6_OVERLAY_VERSION=${{ steps.s6OverlayVersion.outputs.version }}
           sbom: true
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
       # https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions#using-an-intermediate-environment-variable
 #      - name: Sign image with a key

@@ -16,14 +16,14 @@ class HitPdfScraper(PdfScraper):
 
         cookie_banner = WebDriverWait(self.driver, 10).until(
             expected_conditions.element_to_be_clickable(
-                (By.XPATH, '//button[contains(text(), "Auswahl bestätigen")]')
+                (By.XPATH, '//button[contains(text(), "Nur Notwendige erlauben")]')
             )
         )
         cookie_banner.click()
 
         pdf_downloads = self.driver.find_elements(
             By.XPATH,
-            '//span[contains(text(), "PDF herunterladen")]/parent::a',
+            '//span[contains(text(), "Download")]/parent::a',
         )
 
         return [item.get_attribute("href") for item in pdf_downloads]

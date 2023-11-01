@@ -16,6 +16,7 @@ RUN apk add --no-cache \
 
 COPY requirements.txt /requirements.txt
 
+# hadolint ignore=DL3013
 RUN pip install --no-cache-dir --upgrade pip
 
 RUN python3 --version; pip3 --version

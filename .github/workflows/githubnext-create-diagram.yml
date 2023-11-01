@@ -1,8 +1,9 @@
 ---
 
 name: Create GitHubNext diagram
+# yamllint disable-line rule:truthy
 on:
-  workflow_dispatch: { }
+  workflow_dispatch: {}
 #  push:
 #    branches: [ master, main ]
 

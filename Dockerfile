@@ -16,6 +16,7 @@ RUN apk add --no-cache \
 
 COPY requirements.txt /requirements.txt
 
+# hadolint ignore=DL3013
 RUN pip install --no-cache-dir --upgrade pip
 
 RUN python3 --version; pip3 --version
@@ -27,12 +28,14 @@ FROM docker.io/library/alpine:latest
 # s6-overlay auto selection of architecture inspired from https://github.com/padhi-homelab/docker_s6-overlay/blob/4cdb04131112a8d89e7ed2102083a062c8168d89/Dockerfile
 ARG TARGETARCH
 
+# hadolint ignore=DL3006
 FROM base AS base-amd64
 ENV S6_OVERLAY_ARCH=x86_64
 
 # FROM base AS base-386
 # ENV S6_OVERLAY_ARCH=i686
 
+# hadolint ignore=DL3006
 FROM base AS base-arm64
 ENV S6_OVERLAY_ARCH=aarch64
 
@@ -45,6 +48,7 @@ ENV S6_OVERLAY_ARCH=aarch64
 # FROM base AS base-ppc64le
 # ENV S6_OVERLAY_ARCH=ppc64le
 
+# hadolint ignore=DL3006
 FROM base-${TARGETARCH}${TARGETVARIANT}
 
 ARG S6_OVERLAY_VERSION

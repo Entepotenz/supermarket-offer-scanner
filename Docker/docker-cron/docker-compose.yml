@@ -9,7 +9,7 @@ x-common-keys-core: &common-keys-core
 services:
   # based on this: https://github.com/AnalogJ/docker-cron
   supermarket-offser-scanner:
-    <<: *common-keys-core # See EXTENSION FIELDS at the top
+    <<: *common-keys-core  # See EXTENSION FIELDS at the top
     build:
       context: ../../
       dockerfile: ./Docker/docker-cron/Dockerfile

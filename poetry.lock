@@ -275,19 +275,19 @@ files = [
 
 [[package]]
 name = "pyhamcrest"
-version = "2.0.4"
+version = "2.1.0"
 description = "Hamcrest framework for matcher objects"
 optional = false
 python-versions = ">=3.6"
 files = [
-    {file = "pyhamcrest-2.0.4-py3-none-any.whl", hash = "sha256:60a41d4783b9d56c9ec8586635d2301db5072b3ea8a51c32dd03c408ae2b0f79"},
-    {file = "pyhamcrest-2.0.4.tar.gz", hash = "sha256:b5d9ce6b977696286cf232ce2adf8969b4d0b045975b0936ac9005e84e67e9c1"},
+    {file = "pyhamcrest-2.1.0-py3-none-any.whl", hash = "sha256:f6913d2f392e30e0375b3ecbd7aee79e5d1faa25d345c8f4ff597665dcac2587"},
+    {file = "pyhamcrest-2.1.0.tar.gz", hash = "sha256:c6acbec0923d0cb7e72c22af1926f3e7c97b8e8d69fc7498eabacaf7c975bd9c"},
 ]
 
 [package.extras]
-dev = ["black", "flake8", "pyhamcrest[docs,tests]", "pytest-mypy", "towncrier", "tox", "tox-asdf", "twine"]
+dev = ["black", "doc2dash", "flake8", "pyhamcrest[docs,tests]", "pytest-mypy", "towncrier", "tox", "tox-asdf", "twine"]
 docs = ["alabaster (>=0.7,<1.0)", "sphinx (>=4.0,<5.0)"]
-tests = ["coverage[toml]", "dataclasses", "mypy (!=0.940)", "pytest (>=5.0)", "pytest-mypy-plugins", "pytest-sugar", "pytest-xdist", "types-dataclasses", "types-mock"]
+tests = ["coverage[toml]", "dataclasses", "mypy (!=0.940)", "pytest (>=5.0)", "pytest-mypy-plugins", "pytest-sugar", "pytest-xdist", "pyyaml", "types-dataclasses", "types-mock"]
 tests-numpy = ["numpy", "pyhamcrest[tests]"]
 
 [[package]]
@@ -475,4 +475,4 @@ h11 = ">=0.9.0,<1"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "b1a83648f440fd7efaff342a84a3b7e78953814fda51fdc84fef24ca790a5bb7"
+content-hash = "5402a840fa23c4f7fb2bcff231f45d2956f9148822c9fdbb5ddef996ff0280e0"

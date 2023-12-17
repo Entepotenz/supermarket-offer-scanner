@@ -10,7 +10,7 @@ packages = [{ include = "source" }]
 python = "^3.11"
 selenium = "^4.16.0"
 typer = "^0.9.0"
-pypdf = "^3.17.1"
+pypdf = "^3.17.2"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.11.0"

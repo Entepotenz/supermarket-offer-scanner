@@ -36,8 +36,8 @@ jobs:
         run: |
           python -m pip install poetry
           poetry self add poetry-plugin-export
-          poetry export -f requirements.txt --without dev --output requirements.txt
-          poetry export -f requirements.txt --with dev --output requirements-dev.txt
+          poetry export --format requirements.txt --without dev --output requirements.txt
+          poetry export --format requirements.txt --with dev --output requirements-dev.txt
       - uses: stefanzweifel/git-auto-commit-action@8756aa072ef5b4a080af5dc8fef36c5d586e521d  # v5.0.0
         if: steps.changed-files-specific.outputs.any_changed == 'true'
         with:

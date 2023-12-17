@@ -11,10 +11,10 @@ docker run --rm \
   -v "$(pwd)/:/source" \
   -v "/source/.venv" \
   python:3-slim bash -c "\
-    apt-get update; \
     pip install poetry; \
     cd /source; \
     poetry self add poetry-plugin-export; \
     poetry update; \
-    poetry export -f requirements.txt --without dev --output /source/requirements.txt; \
-    poetry export -f requirements.txt --with dev --output /source/requirements-dev.txt;"
+    poetry lock; \
+    poetry export --format requirements.txt --without dev --output /source/requirements.txt; \
+    poetry export --format requirements.txt --with dev --output /source/requirements-dev.txt;"

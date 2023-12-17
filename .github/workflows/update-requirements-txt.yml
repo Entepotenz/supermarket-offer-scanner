@@ -33,7 +33,6 @@ jobs:
       - name: Install dependencies
         if: steps.changed-files-specific.outputs.any_changed == 'true'
         run: |
-          python -m pip install --upgrade pip
           python -m pip install poetry
           poetry self add poetry-plugin-export
           poetry export -f requirements.txt --without dev --output requirements.txt

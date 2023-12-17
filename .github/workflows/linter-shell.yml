@@ -7,6 +7,8 @@ on:
   push:
     paths:
       - '**.sh'
+  workflow_dispatch:
+
 permissions: read-all
 jobs:
   lint-shell-script:

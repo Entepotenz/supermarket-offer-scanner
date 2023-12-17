@@ -10,6 +10,7 @@ class Pushover:
 
     def send_notification(self, message: str) -> None:
         conn = http.client.HTTPSConnection("api.pushover.net:443")
+        print("test")
         conn.request(
             "POST",
             "/1/messages.json",

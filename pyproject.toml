@@ -13,7 +13,7 @@ typer = "^0.9.0"
 pypdf = "^3.17.2"
 
 [tool.poetry.group.dev.dependencies]
-black = "^23.11.0"
+black = "^23.12.1"
 pyhamcrest = "^2.0.4"
 
 [build-system]

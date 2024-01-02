@@ -5,21 +5,20 @@ name: Run Tests
 on:
   push:
     paths:
-      - '**.py'
+      - "**.py"
       - tests
       - source
-      - '*requirements*.txt'
-      - '**poetry.lock'
-      - '**pyproject.toml'
+      - "*requirements*.txt"
+      - "**poetry.lock"
+      - "**pyproject.toml"
   workflow_dispatch:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [ "3.11" ]
+        python-version: ["3.11"]
 
     steps:
       - uses: actions/checkout@v4

@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    "esbenp.prettier-vscode",
+    "EditorConfig.EditorConfig",
+    "foxundermoon.shell-format"
+  ],
+  "unwantedRecommendations": []
+}

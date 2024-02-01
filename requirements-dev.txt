@@ -122,9 +122,9 @@ pycparser==2.21 ; python_version >= "3.10" and os_name == "nt" and implementatio
 pyhamcrest==2.1.0 ; python_version >= "3.10" and python_version < "4.0" \
     --hash=sha256:c6acbec0923d0cb7e72c22af1926f3e7c97b8e8d69fc7498eabacaf7c975bd9c \
     --hash=sha256:f6913d2f392e30e0375b3ecbd7aee79e5d1faa25d345c8f4ff597665dcac2587
-pypdf==3.17.4 ; python_version >= "3.10" and python_version < "4.0" \
-    --hash=sha256:6aa0f61b33779b64486de3f42835d3668badd48dac4a536aeb87da187a5eacd2 \
-    --hash=sha256:ec96e2e4fc9648ac609d19c00d41e9d606e0ae2ce5a0bbe7691426f5f157166a
+pypdf==4.0.1 ; python_version >= "3.10" and python_version < "4.0" \
+    --hash=sha256:871badcfe335dd68b6b563aa7646288c6b86f9ceecffb21e86341261d65d8173 \
+    --hash=sha256:fe7c313c7e8074a516eae9d9df0111b7b9769f7a210479af7a342d27270ef81a
 pysocks==1.7.1 ; python_version >= "3.10" and python_version < "4.0" \
     --hash=sha256:08e69f092cc6dbe92a0fdd16eeb9b9ffbc13cadfe5ca4c7bd92ffb078b293299 \
     --hash=sha256:2725bd0a9925919b9b51739eea5f9e2bae91e83288108a9ad338b2e3a4435ee5 \

@@ -8,7 +8,7 @@ packages = [{ include = "source" }]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-selenium = "^4.16.0"
+selenium = "^4.17.2"
 typer = "^0.9.0"
 pypdf = "^4.0.1"
 

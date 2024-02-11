@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:1
 FROM docker.io/library/alpine:latest as builder
 
 ENV PATH /usr/local/bin:$PATH

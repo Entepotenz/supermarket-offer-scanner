@@ -1,5 +1,5 @@
-# syntax=docker/dockerfile:1
-FROM docker.io/library/alpine:latest as builder
+# syntax=docker/dockerfile:1@sha256:dbbd5e059e8a07ff7ea6233b213b36aa516b4c53c645f1817a4dd18b83cbea56
+FROM docker.io/library/alpine:latest@sha256:c5b1261d6d3e43071626931fc004f70149baeba2c8ec672bd4f27761f8e1ad6b as builder
 
 ENV PATH /usr/local/bin:$PATH
 
@@ -21,7 +21,7 @@ RUN python3 --version; pip3 --version
 
 RUN pip install --no-cache-dir --target=/dependencies -r /requirements.txt
 
-FROM docker.io/library/alpine:latest
+FROM docker.io/library/alpine:latest@sha256:c5b1261d6d3e43071626931fc004f70149baeba2c8ec672bd4f27761f8e1ad6b
 
 # s6-overlay auto selection of architecture inspired from https://github.com/padhi-homelab/docker_s6-overlay/blob/4cdb04131112a8d89e7ed2102083a062c8168d89/Dockerfile
 ARG TARGETARCH

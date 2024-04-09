@@ -11,8 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
       - name: Update diagram
-        uses: githubocto/repo-visualizer@0.9.1
+        uses: githubocto/repo-visualizer@a999615bdab757559bf94bda1fe6eef232765f85 # 0.9.1
         with:
           excluded_paths: "LICENSE,.github,Docker"

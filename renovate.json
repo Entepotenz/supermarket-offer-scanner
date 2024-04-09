@@ -13,6 +13,6 @@
     "pip_requirements",
     "pip_requirements",
     "poetry",
-    "regex"
+    "custom.regex"
   ]
 }

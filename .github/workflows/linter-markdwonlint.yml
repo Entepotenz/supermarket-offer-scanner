@@ -1,12 +1,11 @@
 ---
-
 name: Check for linting Markdown
 
 # yamllint disable-line rule:truthy
 on:
   push:
     paths:
-      - '**.md'
+      - "**.md"
   workflow_dispatch:
 
 permissions: read-all
@@ -14,10 +13,10 @@ jobs:
   lint-shell-script:
     name: run markdownlint
     runs-on: ubuntu-latest
+    if: (!startsWith(github.event.pull_request.head.ref, 'dependabot/') && !startsWith(github.event.pull_request.head.ref, 'renovate/') && github.event.head_commit.author.username != 'renovate-bot')
+
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+      - uses: DavidAnson/markdownlint-cli2-action@510b996878fc0d1a46c8a04ec86b06dbfba09de7 # v15.0.0
         with:
-          fetch-depth: 0
-      - uses: DavidAnson/markdownlint-cli2-action@510b996878fc0d1a46c8a04ec86b06dbfba09de7  # v15.0.0
-        with:
-          globs: '**/*.md'
+          globs: "**/*.md"

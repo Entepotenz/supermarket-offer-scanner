@@ -11,8 +11,6 @@ pushd "$PWD"
 
 cd "$SCRIPT_DIR"
 
-S6_OVERLAY_VERSION=$(tr -d '\n' <"$SCRIPT_DIR/../../s6_overlay_version.txt")
-
-docker-compose build --build-arg S6_OVERLAY_VERSION="${S6_OVERLAY_VERSION}"
+docker-compose build
 
 popd

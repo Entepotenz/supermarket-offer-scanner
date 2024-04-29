@@ -7,12 +7,12 @@ ENV LANG de_DE.UTF-8
 ENV LC_ALL de_DE.UTF-8
 
 RUN apk add --no-cache \
-    python3 \
-    python3-dev \
-    py3-pip \
-    build-base \
-#    musl-locales \
-#    musl-locales-lang \
+  python3 \
+  python3-dev \
+  py3-pip \
+  build-base \
+  #    musl-locales \
+  #    musl-locales-lang \
   && rm -rf /var/cache/apk/*
 
 COPY requirements.txt /requirements.txt
@@ -46,29 +46,30 @@ ENV S6_OVERLAY_ARCH=x86_64
 
 #FROM base-${TARGETARCH}${TARGETVARIANT}
 
-ARG S6_OVERLAY_VERSION
+# renovate: datasource=github-release depName=just-containers/s6-overlay versioning=regex:^v(?<major>\d+)(\.(?<minor>\d+))?(\.(?<patch>\d+)?(\.(?<build>\d+)))$
+ARG S6_OVERLAY_VERSION=v3.1.6.2
 
 RUN apk add --no-cache \
-    bash \
-    curl \
-    tzdata \
-    xz \
-    shadow
+  bash \
+  curl \
+  tzdata \
+  xz \
+  shadow
 
 # add s6 overlay
-ADD https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-noarch.tar.xz /tmp
-ADD https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-noarch.tar.xz.sha256 /tmp
+ADD https://github.com/just-containers/s6-overlay/releases/download/${S6_OVERLAY_VERSION}/s6-overlay-noarch.tar.xz /tmp
+ADD https://github.com/just-containers/s6-overlay/releases/download/${S6_OVERLAY_VERSION}/s6-overlay-noarch.tar.xz.sha256 /tmp
 RUN tar -C / -Jxpf "/tmp/s6-overlay-noarch.tar.xz"
-ADD https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-${S6_OVERLAY_ARCH}.tar.xz /tmp
-ADD https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-${S6_OVERLAY_ARCH}.tar.xz.sha256 /tmp
+ADD https://github.com/just-containers/s6-overlay/releases/download/${S6_OVERLAY_VERSION}/s6-overlay-${S6_OVERLAY_ARCH}.tar.xz /tmp
+ADD https://github.com/just-containers/s6-overlay/releases/download/${S6_OVERLAY_VERSION}/s6-overlay-${S6_OVERLAY_ARCH}.tar.xz.sha256 /tmp
 RUN tar -C / -Jxpf "/tmp/s6-overlay-${S6_OVERLAY_ARCH}.tar.xz"
 
 # add s6 optional symlinks
-ADD https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-symlinks-noarch.tar.xz /tmp
-ADD https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-symlinks-noarch.tar.xz.sha256 /tmp
+ADD https://github.com/just-containers/s6-overlay/releases/download/${S6_OVERLAY_VERSION}/s6-overlay-symlinks-noarch.tar.xz /tmp
+ADD https://github.com/just-containers/s6-overlay/releases/download/${S6_OVERLAY_VERSION}/s6-overlay-symlinks-noarch.tar.xz.sha256 /tmp
 RUN tar -C / -Jxpf "/tmp/s6-overlay-symlinks-noarch.tar.xz"
-ADD https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-symlinks-arch.tar.xz /tmp
-ADD https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-symlinks-arch.tar.xz.sha256 /tmp
+ADD https://github.com/just-containers/s6-overlay/releases/download/${S6_OVERLAY_VERSION}/s6-overlay-symlinks-arch.tar.xz /tmp
+ADD https://github.com/just-containers/s6-overlay/releases/download/${S6_OVERLAY_VERSION}/s6-overlay-symlinks-arch.tar.xz.sha256 /tmp
 RUN tar -C / -Jxpf "/tmp/s6-overlay-symlinks-arch.tar.xz"
 
 # Verifying s6-overlay Downloads
@@ -76,26 +77,26 @@ RUN tar -C / -Jxpf "/tmp/s6-overlay-symlinks-arch.tar.xz"
 RUN cd /tmp && sha256sum -c -- *.sha256
 
 RUN echo "**** create abc user and make our folders ****" && \
-    groupmod -g 1000 users && \
-    useradd -u 911 -U -d /config -s /bin/false abc && \
-    usermod -G users abc && \
-    mkdir -p \
-        /app \
-        /config \
-        /defaults && \
-    echo "**** cleanup ****" && \
-    rm -rf \
-        /tmp/*
+  groupmod -g 1000 users && \
+  useradd -u 911 -U -d /config -s /bin/false abc && \
+  usermod -G users abc && \
+  mkdir -p \
+  /app \
+  /config \
+  /defaults && \
+  echo "**** cleanup ****" && \
+  rm -rf \
+  /tmp/*
 
 RUN which crond && \
-    rm -rf /etc/periodic
+  rm -rf /etc/periodic
 
 # environment variables
 ENV PS1="$(whoami)@$(hostname):$(pwd)\\$ " \
-    HOME="/root" \
-    TERM="xterm" \
-    S6_CMD_WAIT_FOR_SERVICES_MAXTIME="0" \
-    S6_VERBOSITY=1
+  HOME="/root" \
+  TERM="xterm" \
+  S6_CMD_WAIT_FOR_SERVICES_MAXTIME="0" \
+  S6_VERBOSITY=1
 
 VOLUME ["/config"]
 
@@ -117,11 +118,11 @@ ENV LC_ALL de_DE.UTF-8
 #ENV MUSL_LOCPATH="/usr/share/i18n/locales/musl"
 
 RUN apk add --no-cache \
-    python3 \
-    chromium \
-    chromium-chromedriver \
-#    musl-locales \
-#    musl-locales-lang \
+  python3 \
+  chromium \
+  chromium-chromedriver \
+  #    musl-locales \
+  #    musl-locales-lang \
   && rm -rf /var/cache/apk/*
 
 COPY --from=builder /dependencies /usr/local

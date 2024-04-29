@@ -6,6 +6,7 @@
     "regexManagers:dockerfileVersions"
   ],
   "enabledManagers": [
+    "custom.regex",
     "docker-compose",
     "dockerfile",
     "github-actions",
@@ -14,5 +15,19 @@
     "pip_requirements",
     "poetry",
     "custom.regex"
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "datasourceTemplate": "github-releases",
+      "fileMatch": [
+        "(^|/|\\.)([Dd]ocker|[Cc]ontainer)file.*$",
+        "(^|/)([Dd]ocker|[Cc]ontainer)file[^/]*$"
+      ],
+      "matchStrings": [
+        "#\\s?renovate: datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\s.*?ARG\\s+S6_OVERLAY_VERSION=\\s*(?<currentValue>.*)"
+      ],
+      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
+    }
   ]
 }

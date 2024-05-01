@@ -10,7 +10,7 @@ docker run --rm \
   -it \
   -v "$(pwd)/:/source" \
   -v "/source/.venv" \
-  python:3-slim bash -c "\
+  python:3.12.3-slim@sha256:2be8daddbb82756f7d1f2c7ece706aadcb284bf6ab6d769ea695cc3ed6016743 bash -c "\
     pip install poetry; \
     cd /source; \
     poetry self add poetry-plugin-export; \

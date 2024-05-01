@@ -55,7 +55,7 @@ jobs:
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@e92390c5fb421da1463c202d546fed0ec5c39f20 # v3.1.0
-        if: github.event_name != 'pull_request'
+        if: (github.event_name != 'pull_request') && (!startsWith(github.event.pull_request.head.ref, 'dependabot/') && !startsWith(github.event.pull_request.head.ref, 'renovate/') && github.event.head_commit.author.username != 'renovate-bot')
         with:
           registry: ${{ env.REGISTRY_GITHUB }}
           username: ${{ github.repository_owner }}
@@ -82,7 +82,7 @@ jobs:
           platforms: ${{ env.BUILD_PLATFORMS }}
           pull: true
           file: Docker/docker-cron/Dockerfile
-          push: ${{ github.event_name != 'pull_request' }}
+          push: ${{ (github.event_name != 'pull_request') && (!startsWith(github.event.pull_request.head.ref, 'dependabot/') && !startsWith(github.event.pull_request.head.ref, 'renovate/') && github.event.head_commit.author.username != 'renovate-bot') }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           secrets: |

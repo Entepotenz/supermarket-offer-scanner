@@ -38,7 +38,7 @@ jobs:
           poetry self add poetry-plugin-export
           poetry export --format requirements.txt --without dev --output requirements.txt
           poetry export --format requirements.txt --with dev --output requirements-dev.txt
-      - uses: stefanzweifel/git-auto-commit-action@8756aa072ef5b4a080af5dc8fef36c5d586e521d # v5.0.0
+      - uses: stefanzweifel/git-auto-commit-action@8621497c8c39c72f3e2a999a26b4ca1b5058a842 # v5.0.1
         if: steps.changed-files-specific.outputs.any_changed == 'true'
         with:
           file_pattern: "requirements*.txt"

@@ -3,7 +3,8 @@
   "extends": [
     "config:best-practices",
     "helpers:pinGitHubActionDigests",
-    "regexManagers:dockerfileVersions"
+    "regexManagers:dockerfileVersions",
+    "group:recommended"
   ],
   "enabledManagers": [
     "custom.regex",

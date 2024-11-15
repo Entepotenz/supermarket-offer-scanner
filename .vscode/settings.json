@@ -1,6 +1,32 @@
 {
   "editor.formatOnSave": true,
+  "cSpell.language": "en,de,de-DE",
+  "files.associations": {},
+  "ansible.validation.lint.arguments": "--fix",
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+    },
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features",
+    "editor.formatOnSave": true
+  },
   "[yaml]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   }
+  "black-formatter.importStrategy": "fromEnvironment",
+  "isort.importStrategy": "fromEnvironment",
+  "isort.args": [
+    "--profile",
+    "black"
+  ],
+  "flake8.importStrategy": "fromEnvironment",
+  "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
 }

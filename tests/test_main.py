@@ -3,7 +3,7 @@ import os
 import sys
 import unittest
 
-from hamcrest import equal_to, assert_that, contains_string
+from hamcrest import assert_that, contains_string, equal_to
 from typer.testing import CliRunner
 
 sys.path.insert(

@@ -4,7 +4,7 @@
     "config:best-practices",
     "helpers:pinGitHubActionDigests",
     "regexManagers:dockerfileVersions",
-    "security:openssf-scorecard".
+    "security:openssf-scorecard",
     ":disableRateLimiting"
   ],
   "enabledManagers": [
@@ -31,9 +31,7 @@
     },
     {
       "customType": "regex",
-      "fileMatch": [
-        "run-.+.sh"
-      ],
+      "fileMatch": ["run-.+.sh"],
       "matchStrings": [
         "DOCKER_IMAGE=\"(?<depName>.*?):(?<currentValue>.*?)@(?<currentDigest>sha256:[a-f0-9]+)\""
       ],

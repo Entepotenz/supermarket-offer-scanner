@@ -26,17 +26,18 @@ jobs:
         with:
           files: |
             **/*.py
+      - name: Install poetry
+        run: pipx install poetry
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@f677139bbe7f9c59b41e40162b753c062f5d49a3 # v5.2.0
         if: steps.changed-files-specific.outputs.any_changed == 'true'
         with:
           python-version: ${{ matrix.python-version }}
+          cache: "poetry"
       - name: reformat code
         if: steps.changed-files-specific.outputs.any_changed == 'true'
         run: |
-          python -m pip install --upgrade pip
-          python -m pip install poetry
-          poetry install
+          poetry install --with dev --no-interaction
           poetry run black ./
       - uses: stefanzweifel/git-auto-commit-action@8621497c8c39c72f3e2a999a26b4ca1b5058a842 # v5.0.1
         if: steps.changed-files-specific.outputs.any_changed == 'true'

@@ -10,16 +10,18 @@ RUN apk add --no-cache \
   python3 \
   python3-dev \
   py3-pip \
+  poetry \
   build-base \
   #    musl-locales \
   #    musl-locales-lang \
   && rm -rf /var/cache/apk/*
 
-COPY requirements.txt /requirements.txt
+RUN python3 --version;\
+  pip3 --version; \
+  poetry --version
 
-RUN python3 --version; pip3 --version
-
-RUN pip install --no-cache-dir --target=/dependencies -r /requirements.txt
+RUN poetry self add poetry-plugin-export; \
+  poetry export --without dev --format=requirements.txt | pip install --no-cache-dir --target=/dependencies -r /dev/stdin;
 
 FROM docker.io/library/alpine:latest@sha256:c5b1261d6d3e43071626931fc004f70149baeba2c8ec672bd4f27761f8e1ad6b
 

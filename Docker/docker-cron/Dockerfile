@@ -1,6 +1,8 @@
 # syntax=docker/dockerfile:1@sha256:865e5dd094beca432e8c0a1d5e1c465db5f998dca4e439981029b3b81fb39ed5
 FROM docker.io/library/alpine:latest@sha256:c5b1261d6d3e43071626931fc004f70149baeba2c8ec672bd4f27761f8e1ad6b as builder
 
+SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
+
 ENV PATH /usr/local/bin:$PATH
 
 ENV LANG de_DE.UTF-8
@@ -20,8 +22,11 @@ RUN python3 --version;\
   pip3 --version; \
   poetry --version
 
-RUN poetry self add poetry-plugin-export; \
-  poetry export --without dev --format=requirements.txt | pip install --no-cache-dir --target=/dependencies -r /dev/stdin;
+WORKDIR /app
+
+COPY pyproject.toml poetry.lock ./
+
+RUN poetry export --without dev --format=requirements.txt | pip install --no-cache-dir --target=/dependencies -r /dev/stdin;
 
 FROM docker.io/library/alpine:latest@sha256:c5b1261d6d3e43071626931fc004f70149baeba2c8ec672bd4f27761f8e1ad6b
 

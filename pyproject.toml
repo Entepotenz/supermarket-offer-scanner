@@ -13,7 +13,7 @@ typer = "0.12.3"
 pypdf = "4.2.0"
 
 [tool.poetry.group.dev.dependencies]
-black = "24.4.2"
+black = "24.10.0"
 pyhamcrest = "2.1.0"
 pytest = "8.2.0"
 ruff = "0.9.6"

@@ -44,6 +44,19 @@
       "enabled": true,
       "matchManagers": ["github-actions"],
       "matchUpdateTypes": ["minor", "patch"]
+    },
+    {
+      "groupName": "Development Tools & Linters",
+      "matchDepTypes": ["devDependencies"],
+      "separateMajorMinor": true,
+      "matchPackageNames": [
+        "/black/",
+        "/flake8/",
+        "/mypy/",
+        "/isort/",
+        "/pylint/",
+        "/ruff/"
+      ]
     }
   ]
 }

@@ -5,7 +5,8 @@
     "helpers:pinGitHubActionDigests",
     "regexManagers:dockerfileVersions",
     "security:openssf-scorecard",
-    ":disableRateLimiting"
+    ":disableRateLimiting",
+    "mergeConfidence:all-badges"
   ],
   "enabledManagers": [
     "custom.regex",

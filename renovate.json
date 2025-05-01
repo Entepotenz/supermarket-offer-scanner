@@ -47,16 +47,18 @@
       "matchUpdateTypes": ["minor", "patch"]
     },
     {
-      "groupName": "Development Tools & Linters",
-      "matchDepTypes": ["devDependencies"],
-      "separateMajorMinor": true,
+      "matchManagers": [
+        "poetry"
+      ],
+      "groupName": "Testing/Linting Tools",
+      "minimumReleaseAge": "3 days",
       "matchPackageNames": [
-        "/black/",
-        "/flake8/",
-        "/mypy/",
-        "/isort/",
-        "/pylint/",
-        "/ruff/"
+        "/^black/",
+        "/^coverage/",
+        "/^flake8/",
+        "/^mypy/",
+        "/^pytest/",
+        "/^ruff/"
       ]
     }
   ]

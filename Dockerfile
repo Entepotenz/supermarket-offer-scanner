@@ -113,8 +113,8 @@ ENTRYPOINT ["/init"]
 # https://stackoverflow.com/questions/58701233/docker-logs-erroneously-appears-empty-until-container-stops
 # ENV PYTHONUNBUFFERED=1
 
-ENV LANG de_DE.UTF-8
-ENV LC_ALL de_DE.UTF-8
+ENV LANG=de_DE.UTF-8
+ENV LC_ALL=de_DE.UTF-8
 #ENV MUSL_LOCPATH="/usr/share/i18n/locales/musl"
 
 RUN apk add --no-cache \

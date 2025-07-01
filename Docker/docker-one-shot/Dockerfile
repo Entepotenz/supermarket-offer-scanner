@@ -20,8 +20,8 @@ FROM docker.io/library/python:3.13.5-alpine3.22@sha256:9b4929a72599b6c6389ece4ec
 
 SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
 
-ENV LANG de_DE.UTF-8
-ENV LC_ALL de_DE.UTF-8
+ENV LANG=de_DE.UTF-8
+ENV LC_ALL=de_DE.UTF-8
 #ENV MUSL_LOCPATH="/usr/share/i18n/locales/musl"
 
 RUN apk add --no-cache \

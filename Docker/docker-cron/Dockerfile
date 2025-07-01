@@ -107,8 +107,8 @@ CMD [ "/etc/s6-overlay/s6-rc.d/svc-cron/run" ]
 
 ENTRYPOINT ["/init"]
 
-ENV LANG de_DE.UTF-8
-ENV LC_ALL de_DE.UTF-8
+ENV LANG=de_DE.UTF-8
+ENV LC_ALL=de_DE.UTF-8
 #ENV MUSL_LOCPATH="/usr/share/i18n/locales/musl"
 
 RUN apk add --no-cache \

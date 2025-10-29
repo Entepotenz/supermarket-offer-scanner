@@ -8,15 +8,6 @@
     ":disableRateLimiting",
     "mergeConfidence:all-badges"
   ],
-  "enabledManagers": [
-    "custom.regex",
-    "docker-compose",
-    "dockerfile",
-    "github-actions",
-    "pep621",
-    "pip_requirements",
-    "poetry"
-  ],
   "customManagers": [
     {
       "customType": "regex",

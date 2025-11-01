@@ -15,10 +15,10 @@ pypdf = "4.2.0"
 [tool.poetry.group.dev.dependencies]
 black = "24.10.0"
 pyhamcrest = "2.1.0"
-pytest = "8.4.1"
-ruff = "0.12.1"
+pytest = "8.4.2"
+ruff = "0.14.2"
 yapf = "0.43.0"
-mypy = "1.16.1"
+mypy = "1.18.2"
 flake8 = "7.3.0"
 
 [build-system]

@@ -19,7 +19,7 @@ jobs:
       matrix:
         python-version: ["3"]
     steps:
-      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       - name: Get changed files
         id: changed-files-specific
         uses: tj-actions/changed-files@ed68ef82c095e0d48ec87eccea555d944a631a4c # v46.0.5
@@ -39,7 +39,7 @@ jobs:
         run: |
           poetry install --with dev --no-interaction
           poetry run black ./
-      - uses: stefanzweifel/git-auto-commit-action@28e16e81777b558cc906c8750092100bbb34c5e3 # v7.0.0
+      - uses: stefanzweifel/git-auto-commit-action@04702edda442b2e678b25b537cec683a1493fcb9 # v7.1.0
         if: steps.changed-files-specific.outputs.any_changed == 'true'
         with:
           file_pattern: "*.py"

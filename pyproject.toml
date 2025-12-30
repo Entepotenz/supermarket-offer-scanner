@@ -16,9 +16,9 @@ pypdf = "4.2.0"
 black = "24.10.0"
 pyhamcrest = "2.1.0"
 pytest = "8.4.2"
-ruff = "0.14.2"
+ruff = "0.14.10"
 yapf = "0.43.0"
-mypy = "1.18.2"
+mypy = "1.19.1"
 flake8 = "7.3.0"
 
 [build-system]

@@ -29,6 +29,7 @@ class TestMain(unittest.TestCase):
                 "lidl",
                 "--loglevel",
                 "debug",
+                "--not-headless",
             ],
         )
         assert_that(result.exit_code, equal_to(0))

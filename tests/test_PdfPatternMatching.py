@@ -24,7 +24,7 @@ class TestPdfPatternMatching(unittest.TestCase):
         with open(self.sample_pdf_filepath, "rb") as fh:
             buf = BytesIO(fh.read())
 
-        regex_for_finding_ip_address = "\d{1,3} \d{1,3} \d{1,3} \d{1,3}"
+        regex_for_finding_ip_address = r"\d{1,3} \d{1,3} \d{1,3} \d{1,3}"
         test_string_but_lowercase = "THIS IS A TEST STRING".lower()
 
         regex_collection = [regex_for_finding_ip_address, test_string_but_lowercase]
@@ -49,7 +49,7 @@ class TestPdfPatternMatching(unittest.TestCase):
         with open(self.sample_pdf_filepath, "rb") as fh:
             buf = BytesIO(fh.read())
 
-        regex_for_string_with_spaces = "THIS\s+IS\s+A\s+TEST\s+STRING\s+WITH\s+SPACES"
+        regex_for_string_with_spaces = r"THIS\s+IS\s+A\s+TEST\s+STRING\s+WITH\s+SPACES"
 
         regex_for_string_with_hyphens = "THIS-IS-A-TEST-STRING-WITH-HYPHENS".replace(
             "-", ""
@@ -72,7 +72,7 @@ class TestPdfPatternMatching(unittest.TestCase):
             result.get(0),
             contains_inanyorder(
                 *[
-                    regex_for_string_with_spaces.replace("\s+", " "),
+                    regex_for_string_with_spaces.replace(r"\s+", " "),
                     regex_for_string_with_hyphens,
                     regex_for_string_with_line_breaks,
                 ]

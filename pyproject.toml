@@ -5,6 +5,7 @@ description = ""
 authors = ["Florian Kretschmer <entepotenz@gmail.com>"]
 readme = "README.md"
 packages = [{ include = "source" }]
+package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.10"

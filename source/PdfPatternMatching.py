@@ -33,13 +33,20 @@ class PdfPatterMatching:
 
     @staticmethod
     def apply_regex_findall(text: str, regex_patterns: list[re.Pattern]) -> list[str]:
-        result = []
+        result: list[str] = []
+
         for pattern in regex_patterns:
             matches = re.findall(pattern=pattern, string=text, flags=re.IGNORECASE)
 
             if matches:
-                matches = matches[0]
-                result.append(matches)
+                first_match = matches[0]
+                if isinstance(first_match, tuple):
+                    # join tuple elements into a string
+                    first_match_str = " ".join(first_match)
+                else:
+                    first_match_str = first_match
+
+                result.append(first_match_str)
 
         return result
 

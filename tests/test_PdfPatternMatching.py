@@ -10,7 +10,7 @@ sys.path.insert(
     0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "source"))
 )
 
-from source import PdfPatternMatching
+from source import PdfPatternMatching  # noqa: disable=E402
 
 logger = logging.getLogger(__name__)
 

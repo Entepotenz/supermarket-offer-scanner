@@ -33,15 +33,17 @@ class TestPdfPatternMatching(unittest.TestCase):
             buf, regex_collection
         )
         assert_that(result, has_length(2))
-        assert_that(result.get(0), has_length(2))
+        matches_0 = result[0]
+        assert_that(matches_0, has_length(2))
         assert_that(
-            result.get(0),
+            matches_0,
             contains_inanyorder(*[test_string_but_lowercase.upper(), "127 0 0 1"]),
         )
 
-        assert_that(result.get(2), has_length(1))
+        matches_2 = result[2]
+        assert_that(matches_2, has_length(1))
         assert_that(
-            result.get(2),
+            matches_2,
             contains_inanyorder(*[test_string_but_lowercase.lower()]),
         )
 
@@ -66,10 +68,12 @@ class TestPdfPatternMatching(unittest.TestCase):
         result = PdfPatternMatching.PdfPatterMatching.run_and_get_results(
             buf, regex_collection
         )
+
+        matches = result[0]
         assert_that(result, has_length(1))
-        assert_that(result.get(0), has_length(3))
+        assert_that(matches, has_length(3))
         assert_that(
-            result.get(0),
+            matches,
             contains_inanyorder(
                 *[
                     regex_for_string_with_spaces.replace(r"\s+", " "),

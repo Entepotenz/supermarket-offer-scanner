@@ -1,6 +1,4 @@
 ---
-version: "3.7"
-
 # from: https://github.com/htpcBeginner/docker-traefik/blob/master/docker-compose-t2.yml
 x-common-keys-core: &common-keys-core
   security_opt:
@@ -9,7 +7,7 @@ x-common-keys-core: &common-keys-core
 services:
   # based on this: https://github.com/AnalogJ/docker-cron
   supermarket-offer-scanner:
-    <<: *common-keys-core  # See EXTENSION FIELDS at the top
+    <<: *common-keys-core # See EXTENSION FIELDS at the top
     build:
       context: ../../
       dockerfile: ./Docker/docker-cron/Dockerfile

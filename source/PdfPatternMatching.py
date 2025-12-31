@@ -78,7 +78,7 @@ class PdfPatterMatching:
 
     @staticmethod
     def remove_multiple_whitespace_characters(input_string: str) -> str:
-        return re.sub("\s+", " ", input_string)
+        return re.sub(r"\s+", " ", input_string)
 
     @staticmethod
     def remove_hyphens(input_string: str) -> str:

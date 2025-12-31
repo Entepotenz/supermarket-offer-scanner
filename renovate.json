@@ -1,12 +1,10 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:best-practices",
-    "helpers:pinGitHubActionDigests",
-    "customManagers:dockerfileVersions",
-    "security:openssf-scorecard",
-    ":disableRateLimiting",
-    "mergeConfidence:all-badges"
+    "github>Entepotenz/renovate_custom_presets//default.json",
+    "github>Entepotenz/renovate_custom_presets//group-linters.json",
+    "github>Entepotenz/renovate_custom_presets//group-github-actions.json",
+    "github>Entepotenz/renovate_custom_presets//group-python-testing-and-linting-packages.json"
   ],
   "customManagers": [
     {
@@ -23,9 +21,7 @@
     },
     {
       "customType": "regex",
-      "managerFilePatterns": [
-        "/run-.+.sh/"
-      ],
+      "managerFilePatterns": ["/run-.+.sh/"],
       "matchStrings": [
         "DOCKER_IMAGE=\"(?<depName>.*?):(?<currentValue>.*?)@(?<currentDigest>sha256:[a-f0-9]+)\""
       ],
@@ -34,30 +30,11 @@
   ],
   "packageRules": [
     {
-      "groupName": "GitHub Artifact Actions",
-      "enabled": true,
-      "matchManagers": [
-        "github-actions"
-      ],
-      "matchUpdateTypes": [
-        "minor",
-        "patch"
-      ]
-    },
-    {
-      "matchManagers": [
-        "poetry"
-      ],
-      "groupName": "Testing/Linting Tools",
-      "minimumReleaseAge": "3 days",
-      "matchPackageNames": [
-        "/^black/",
-        "/^coverage/",
-        "/^flake8/",
-        "/^mypy/",
-        "/^pytest/",
-        "/^ruff/"
-      ]
+      "matchDatasources": ["pypi"],
+      "matchManagers": ["pip_requirements", "poetry"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "Python dependencies",
+      "enabled": true
     }
   ]
 }

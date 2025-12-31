@@ -27,7 +27,10 @@ class TestPdfPatternMatching(unittest.TestCase):
         regex_for_finding_ip_address = r"\d{1,3} \d{1,3} \d{1,3} \d{1,3}"
         test_string_but_lowercase = "THIS IS A TEST STRING".lower()
 
-        regex_collection = [regex_for_finding_ip_address, test_string_but_lowercase]
+        regex_collection = [
+            regex_for_finding_ip_address,
+            test_string_but_lowercase,
+        ]
 
         result = PdfPatternMatching.PdfPatterMatching.run_and_get_results(
             buf, regex_collection

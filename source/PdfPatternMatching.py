@@ -9,7 +9,7 @@ import pypdf
 class PdfPatterMatching:
     @staticmethod
     def run_and_get_results(
-        data_pdf: typing.BinaryIO, regex_patterns: list[re.Pattern]
+        data_pdf: typing.BinaryIO, regex_patterns: list[str]
     ) -> dict:
         texts_grouped_by_page = PdfPatterMatching.get_text_grouped_by_page(data_pdf)
 
@@ -32,7 +32,7 @@ class PdfPatterMatching:
         return matches_grouped_by_page
 
     @staticmethod
-    def apply_regex_findall(text: str, regex_patterns: list[re.Pattern]) -> list[str]:
+    def apply_regex_findall(text: str, regex_patterns: list[str]) -> list[str]:
         result: list[str] = []
 
         for pattern in regex_patterns:

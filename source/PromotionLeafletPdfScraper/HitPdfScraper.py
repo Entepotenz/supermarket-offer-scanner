@@ -26,4 +26,10 @@ class HitPdfScraper(PdfScraper):
             '//span[contains(text(), "Download")]/parent::a',
         )
 
-        return [item.get_attribute("href") for item in pdf_downloads]
+        hrefs: list[str] = []
+        for item in pdf_downloads:
+            href = item.get_attribute("href")
+            if href is not None:
+                hrefs.append(href)
+
+        return hrefs

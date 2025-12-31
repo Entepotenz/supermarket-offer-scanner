@@ -25,4 +25,10 @@ class AldiNordPdfScraper(PdfScraper):
             '//a[contains(text(), "Download")]',
         )
 
-        return [item.get_attribute("href") for item in pdf_downloads]
+        hrefs: list[str] = []
+        for item in pdf_downloads:
+            href = item.get_attribute("href")
+            if href is not None:
+                hrefs.append(href)
+
+        return hrefs

@@ -13,10 +13,9 @@ class PdfPatterMatching:
     ) -> dict:
         texts_grouped_by_page = PdfPatterMatching.get_text_grouped_by_page(data_pdf)
 
-        texts_grouped_by_page = map(
-            PdfPatterMatching.normalize_text, texts_grouped_by_page
+        texts_grouped_by_page = list(
+            map(PdfPatterMatching.normalize_text, texts_grouped_by_page)
         )
-        texts_grouped_by_page = list(texts_grouped_by_page)
 
         # check for regex matches on each page and store results grouped by page
         matches_grouped_by_page = {}

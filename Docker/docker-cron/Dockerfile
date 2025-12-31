@@ -1,34 +1,24 @@
-# syntax=docker/dockerfile:1@sha256:9857836c9ee4268391bb5b09f9f157f3c91bb15821bb77969642813b0d00518d
-FROM docker.io/library/alpine:latest@sha256:c5b1261d6d3e43071626931fc004f70149baeba2c8ec672bd4f27761f8e1ad6b as builder
+FROM docker.io/library/python:3.13.5-alpine3.22@sha256:9b4929a72599b6c6389ece4ecbf415fd1355129f22bb92bb137eea098f05e975 AS builder
 
-SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
+ENV LANG=de_DE.UTF-8
+ENV LC_ALL=de_DE.UTF-8
 
-ENV PATH /usr/local/bin:$PATH
-
-ENV LANG de_DE.UTF-8
-ENV LC_ALL de_DE.UTF-8
-
-RUN apk add --no-cache \
-  python3 \
-  python3-dev \
-  py3-pip \
-  poetry \
-  build-base \
-  #    musl-locales \
-  #    musl-locales-lang \
-  && rm -rf /var/cache/apk/*
-
-RUN python3 --version;\
-  pip3 --version; \
-  poetry --version
+ENV POETRY_NO_INTERACTION=1 \
+    POETRY_VIRTUALENVS_IN_PROJECT=1 \
+    POETRY_VIRTUALENVS_CREATE=1 \
+    POETRY_CACHE_DIR=/tmp/poetry_cache
 
 WORKDIR /app
 
+RUN apk add --no-cache poetry
+
 COPY pyproject.toml poetry.lock ./
 
-RUN poetry export --without dev --format=requirements.txt | pip install --no-cache-dir --target=/dependencies -r /dev/stdin;
+RUN poetry install --without dev --no-root && rm -rf $POETRY_CACHE_DIR
 
-FROM docker.io/library/alpine:latest@sha256:c5b1261d6d3e43071626931fc004f70149baeba2c8ec672bd4f27761f8e1ad6b
+FROM docker.io/library/python:3.13.5-alpine3.22@sha256:9b4929a72599b6c6389ece4ecbf415fd1355129f22bb92bb137eea098f05e975
+
+SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
 
 # s6-overlay auto selection of architecture inspired from https://github.com/padhi-homelab/docker_s6-overlay/blob/4cdb04131112a8d89e7ed2102083a062c8168d89/Dockerfile
 ARG TARGETARCH
@@ -117,26 +107,23 @@ CMD [ "/etc/s6-overlay/s6-rc.d/svc-cron/run" ]
 
 ENTRYPOINT ["/init"]
 
-# https://stackoverflow.com/questions/58701233/docker-logs-erroneously-appears-empty-until-container-stops
-# ENV PYTHONUNBUFFERED=1
-
-ENV LANG de_DE.UTF-8
-ENV LC_ALL de_DE.UTF-8
+ENV LANG=de_DE.UTF-8
+ENV LC_ALL=de_DE.UTF-8
 #ENV MUSL_LOCPATH="/usr/share/i18n/locales/musl"
 
 RUN apk add --no-cache \
-  python3 \
-  chromium \
   chromium-chromedriver \
   #    musl-locales \
   #    musl-locales-lang \
   && rm -rf /var/cache/apk/*
 
-COPY --from=builder /dependencies /usr/local
-ENV PYTHONPATH=/usr/local
+ENV VIRTUAL_ENV=/app/.venv \
+    PATH="/app/.venv/bin:$PATH"
 
 RUN python3 --version
 
 WORKDIR /app
+
+COPY --from=builder ${VIRTUAL_ENV} ${VIRTUAL_ENV}
 
 COPY source/ /app/source/

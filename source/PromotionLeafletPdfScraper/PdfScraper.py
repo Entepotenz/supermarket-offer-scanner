@@ -17,27 +17,21 @@ class PdfScraper:
         self.driver.close()
 
     @abstractmethod
-    def get_urls(self) -> [str]:
+    def get_urls(self) -> list[str]:
         pass
 
     @staticmethod
     def get_pdf_scraper(shop_name: str, headless: bool = False):
         match shop_name.lower():
             case "aldinord":
-                from .AldiNordPdfScraper import (
-                    AldiNordPdfScraper,
-                )
+                from .AldiNordPdfScraper import AldiNordPdfScraper
 
                 return AldiNordPdfScraper(headless=headless)
             case "lidl":
-                from .LidlPdfScraper import (
-                    LidlPdfScraper,
-                )
+                from .LidlPdfScraper import LidlPdfScraper
 
                 return LidlPdfScraper(headless=headless)
             case "hit":
-                from .HitPdfScraper import (
-                    HitPdfScraper,
-                )
+                from .HitPdfScraper import HitPdfScraper
 
                 return HitPdfScraper(headless=headless)

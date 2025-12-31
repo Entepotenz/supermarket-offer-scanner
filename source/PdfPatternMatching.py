@@ -8,13 +8,14 @@ import pypdf
 
 class PdfPatterMatching:
     @staticmethod
-    def run_and_get_results(data_pdf: typing.BinaryIO, regex_patterns: [re]) -> dict:
+    def run_and_get_results(
+        data_pdf: typing.BinaryIO, regex_patterns: list[str]
+    ) -> dict:
         texts_grouped_by_page = PdfPatterMatching.get_text_grouped_by_page(data_pdf)
 
-        texts_grouped_by_page = map(
-            PdfPatterMatching.normalize_text, texts_grouped_by_page
+        texts_grouped_by_page = list(
+            map(PdfPatterMatching.normalize_text, texts_grouped_by_page)
         )
-        texts_grouped_by_page = list(texts_grouped_by_page)
 
         # check for regex matches on each page and store results grouped by page
         matches_grouped_by_page = {}
@@ -31,19 +32,26 @@ class PdfPatterMatching:
         return matches_grouped_by_page
 
     @staticmethod
-    def apply_regex_findall(text: str, regex_patterns: [re]) -> [str]:
-        result = []
+    def apply_regex_findall(text: str, regex_patterns: list[str]) -> list[str]:
+        result: list[str] = []
+
         for pattern in regex_patterns:
             matches = re.findall(pattern=pattern, string=text, flags=re.IGNORECASE)
 
             if matches:
-                matches = matches[0]
-                result.append(matches)
+                first_match = matches[0]
+                if isinstance(first_match, tuple):
+                    # join tuple elements into a string
+                    first_match_str = " ".join(first_match)
+                else:
+                    first_match_str = first_match
+
+                result.append(first_match_str)
 
         return result
 
     @staticmethod
-    def get_text_grouped_by_page(data_pdf: typing.BinaryIO) -> [str]:
+    def get_text_grouped_by_page(data_pdf: typing.BinaryIO) -> list[str]:
         pdf_reader = pypdf.PdfReader(data_pdf)
         texts_grouped_by_page = []
         for page in range(len(pdf_reader.pages)):
@@ -77,7 +85,7 @@ class PdfPatterMatching:
 
     @staticmethod
     def remove_multiple_whitespace_characters(input_string: str) -> str:
-        return re.sub("\s+", " ", input_string)
+        return re.sub(r"\s+", " ", input_string)
 
     @staticmethod
     def remove_hyphens(input_string: str) -> str:

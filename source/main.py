@@ -4,14 +4,13 @@ import logging
 import os
 import pprint
 import urllib.request
-from typing import Optional, List
-
-import typer
-from typing_extensions import Annotated
+from typing import List, Optional
 
 import PdfPatternMatching
 import PromotionLeafletPdfScraper.PdfScraper
 import Pushover
+import typer
+from typing_extensions import Annotated
 
 app = typer.Typer(add_completion=False)
 
@@ -37,8 +36,8 @@ def main(
     pushover_user_key: Annotated[Optional[str], typer.Option()] = None,
     loglevel: Annotated[Optional[str], typer.Option()] = "warning",
 ):
-    logging.basicConfig(level=loglevel.upper())
-    if not shop_name or not shop_name.lower() in shop_names:
+    logging.basicConfig(level=(loglevel or "warning").upper())
+    if not shop_name or shop_name.lower() not in shop_names:
         logging.error("No valid provided SHOP_NAME")
         raise typer.Abort()
     typer.echo(f"ShopName: {shop_name}")

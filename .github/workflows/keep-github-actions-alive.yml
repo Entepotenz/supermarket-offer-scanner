@@ -12,6 +12,8 @@ jobs:
     name: Cronjob based GitHub action
     runs-on: ubuntu-latest
     if: (!startsWith(github.event.pull_request.head.ref, 'dependabot/') && !startsWith(github.event.pull_request.head.ref, 'renovate/') && github.event.head_commit.author.username != 'renovate-bot')
+    permissions:
+      contents: write
 
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1

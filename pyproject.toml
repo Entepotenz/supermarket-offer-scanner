@@ -16,7 +16,7 @@ pypdf = "6.6.0"
 [tool.poetry.group.dev.dependencies]
 black = "24.10.0"
 pyhamcrest = "2.1.0"
-ruff = "0.14.9"
+ruff = "0.14.13"
 yapf = "0.43.0"
 mypy = "1.19.1"
 flake8 = "7.3.0"

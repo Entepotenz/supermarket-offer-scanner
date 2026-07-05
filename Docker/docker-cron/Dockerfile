@@ -4,9 +4,9 @@ ENV LANG=de_DE.UTF-8
 ENV LC_ALL=de_DE.UTF-8
 
 ENV POETRY_NO_INTERACTION=1 \
-    POETRY_VIRTUALENVS_IN_PROJECT=1 \
-    POETRY_VIRTUALENVS_CREATE=1 \
-    POETRY_CACHE_DIR=/tmp/poetry_cache
+  POETRY_VIRTUALENVS_IN_PROJECT=1 \
+  POETRY_VIRTUALENVS_CREATE=1 \
+  POETRY_CACHE_DIR=/tmp/poetry_cache
 
 WORKDIR /app
 
@@ -43,7 +43,7 @@ ENV S6_OVERLAY_ARCH=x86_64
 
 #FROM base-${TARGETARCH}${TARGETVARIANT}
 
-# renovate: datasource=github-release depName=just-containers/s6-overlay versioning=regex:^v(?<major>\d+)(\.(?<minor>\d+))?(\.(?<patch>\d+)?(\.(?<build>\d+)))$
+# renovate: datasource=github-releases depName=just-containers/s6-overlay versioning=regex:^v(?<major>\d+)(\.(?<minor>\d+))?(\.(?<patch>\d+)?(\.(?<build>\d+)))$
 ARG S6_OVERLAY_VERSION=v3.2.2.0
 
 RUN apk add --no-cache \
@@ -118,7 +118,7 @@ RUN apk add --no-cache \
   && rm -rf /var/cache/apk/*
 
 ENV VIRTUAL_ENV=/app/.venv \
-    PATH="/app/.venv/bin:$PATH"
+  PATH="/app/.venv/bin:$PATH"
 
 RUN python3 --version
 

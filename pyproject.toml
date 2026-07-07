@@ -18,7 +18,7 @@ black = "26.5.0"
 pyhamcrest = "2.1.0"
 ruff = "0.15.13"
 yapf = "0.43.0"
-mypy = "1.20.2"
+mypy = "2.1.0"
 flake8 = "7.3.0"
 
 [build-system]

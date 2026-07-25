@@ -44,7 +44,7 @@ ENV S6_OVERLAY_ARCH=x86_64
 #FROM base-${TARGETARCH}${TARGETVARIANT}
 
 # renovate: datasource=github-releases depName=just-containers/s6-overlay versioning=regex:^v(?<major>\d+)(\.(?<minor>\d+))?(\.(?<patch>\d+)?(\.(?<build>\d+)))$
-ARG S6_OVERLAY_VERSION=v3.2.2.0
+ARG S6_OVERLAY_VERSION=v3.2.3.0
 
 RUN apk add --no-cache \
   bash \

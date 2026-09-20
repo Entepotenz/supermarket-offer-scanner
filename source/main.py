@@ -14,7 +14,7 @@ from typing_extensions import Annotated
 
 app = typer.Typer(add_completion=False)
 
-shop_names = ["lidl", "aldinord", "hit"]
+shop_names = ["lidl", "aldinord", "hit", "netto"]
 
 ENVIRONMENT_VARIABLE_PUSHOVER_USER_KEY = "PUSHOVER_USER_KEY"
 ENVIRONMENT_VARIABLE_PUSHOVER_TOKEN = "PUSHOVER_TOKEN"
